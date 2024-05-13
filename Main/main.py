@@ -72,14 +72,14 @@ for i in range(len(Cycle)):
 
 fig, axs = plt.subplots(2)  # Erstellt eine Figure mit 2 Subplots
 
-# Plotting the abstand values over time
+# Plotten von Abstand über Zeit
 axs[0].plot(gesamtzeit, abstand_values)
 axs[0].set_xlabel('Time (s)')
 axs[0].set_ylabel('Abstand')
 axs[0].set_title('Abstand über Zeit')
 axs[0].grid()
 
-# Plotting the position values
+# Plotten der Positionswerte
 axs[1].plot(x_ego, y_ego, label='Position ego (t)')
 axs[1].plot(x_1, y_1, label='Position obj 1 (t)')
 axs[1].plot(x_1, schlauchborderleft, label='Position ego border (t)', color='green')
