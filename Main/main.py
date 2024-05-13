@@ -9,9 +9,13 @@ data = pd.read_csv('~/Documents/MB/Inputdaten.csv', delimiter=';', decimal='.')
 x_ego = data['x_ego']
 y_ego = data['y_ego']
 w_ego = data['w_ego']
+vx_ego = data['vx_ego']
+vy_ego = data['vy_ego']
 breite_ego = data['width_ego']
 x_1 = data['x_1']
 y_1 = data['y_1']
+vx_1 = data['vx_1']
+vy_1 = data['vy_1']
 Cycle = data['Cycle']
 
 # Grenzen des ego-Fahrschlauchs definieren
@@ -47,11 +51,20 @@ for i in range(len(Cycle)):
 
         if schlauch:
             abstand = np.sqrt(np.power(x_1[i] - x_ego[i], 2) + np.power(y_1[i] - y_ego[i], 2))
+            vrel_ego = np.sqrt(vx_ego[i] ** 2 + vy_ego[i] ** 2)
+            vrel_1 = np.sqrt(vx_1[i] ** 2 + vy_1[i] ** 2)
+            ttc = abstand / abs(vrel_ego - vrel_1)
+
         else:
             abstand = 0
+            ttc = 0
+            vrel_1 = 0
+            vrel_ego = 0
 
-        print("Abstand:", abstand)
+        print("Abstand (in m):", abstand)
+        print("Time to collision (in s):", ttc)
         abstand_values.append(abstand)
+
     else:
         schlauchborderleft[i] = y_ego.iloc[i]
         schlauchborderright[i] = y_ego.iloc[i]
